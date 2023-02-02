@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-do list</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="todo_style.css">    
+</head>
+<body>
+    <div class="container"> 
+        <h1 class="ms-5 my-3"> todos</h1> 
+        
+        <input type="text" id="task" class="ms-5">
+        <input type="button" id="click" value="+" class="button_click my-3" onclick="add()">
+        <ul id="box" style="list-style: none;"></ul>
+        <span id="error" class="ms-5 my-2"></span>
+        <div class="button_click ms-5">
+            <input type="button" id="check" value="All" class="button_click my-3" onclick="all()">
+            <input type="button" id="check" value="Active" class="button_click my-3" onclick="active()">
+            <input type="button" id="check" value="Completed" class="button_click my-3"onclick="completed()">
+            <!-- <input type="button" id="click" value="All" class="button_click my-3" > -->
+        </div>
+        <ul id="showBox" style="list-style: none;"></ul>
+    </div>
+    
+    <script>
+        function add() {
+            document.getElementById('error').innerHTML="";
+            let tasks = document.getElementById('task').value;
+            if(tasks=='')
+                document.getElementById('error').innerHTML="Please enter text";
+            else
+            {
+                let box = document.getElementById('box');
+                let li = document.createElement('li');
+                li.textContent = tasks;
+                //for remove
+                let a = document.createElement('a');
+                a.textContent="x";
+                a.href= "javascript:void(0)";
+                li.appendChild(a);
+
+                let b = document.createElement('a');
+                b.textContent="complete";
+                b.href= "javascript:void(0)";
+                let c = document.createElement('a');
+                c.textContent=" ";
+                li.appendChild(c);
+                li.appendChild(b);
+                //show
+                box.appendChild(li);
+                }
+
+            let y = document.querySelector('ul');
+            y.addEventListener('click', function(e) 
+            {
+               let target= e.target;
+               if(target.textContent == "complete")
+               {
+                let box = document.getElementById('box');
+                let li = e.target.parentNode;
+                // let show = document.getElementById('showBox');
+                // show.appendChild(li);
+                li.style.textDecoration = "line-through";
+               }
+               else {
+                let box = document.getElementById('box');
+                let li = e.target.parentNode;
+                box.removeChild(li);
+               }
+            })
+            
+        }
+
+        // function completed() {
+
+        //     let z = document.querySelector('ul');
+        //     z.addEventListener('check', function(e)
+        //     {
+        //         let show = document.getElementById('showBox');
+        //         show.appendChild(li);
+        //     })
+
+        // }
+    </script>
+</body>
+</html>
